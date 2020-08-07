@@ -80,7 +80,6 @@ function installModule(store, rootState, path, rawModule){
   }
 }
 
-
 class Store{
   constructor(options){
     this.vm = new Vue({
@@ -122,6 +121,7 @@ const install = (_Vue) => {
     }
   })
 }
+
 export default {
   install,
   Store

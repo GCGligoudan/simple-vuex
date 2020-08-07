@@ -4,7 +4,7 @@ import Vuex from '../vuex';
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
     age: 10,
   },
@@ -60,3 +60,11 @@ export default new Vuex.Store({
     }
   }
 })
+
+// store.registerModule('d', {
+//   state: {
+//     age: 'd100',
+//   }
+// })
+
+export default store;

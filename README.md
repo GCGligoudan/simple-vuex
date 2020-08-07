@@ -1,29 +1,19 @@
 # vuex-lesson
 
 ## Project setup
+
 ```
 yarn install
 ```
 
 ### Compiles and hot-reloads for development
+
 ```
 yarn run serve
 ```
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+一个自己实现的简版vuex
 
-### Run your tests
-```
-yarn run test
-```
+支持首次配置state getters mutations actions modules
 
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+暂不支持其他vuex api

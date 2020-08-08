@@ -2,9 +2,19 @@ import Vue from 'vue'
 // import Vuex from 'vuex'
 import Vuex from '../vuex';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
+
+const persists = (store) => {
+  store.subscribe((mutation, state) => {
+    console.log(mutation, state);
+    // localStorage.setItem('vuex-state',)
+  });
+}
 
 const store = new Vuex.Store({
+  plugins: [
+    persists, 
+  ],
   state: {
     age: 10,
   },

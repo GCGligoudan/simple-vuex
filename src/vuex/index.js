@@ -90,6 +90,7 @@ class Store{
     this.getters = {};
     this.mutations = {};
     this.actions = {};
+    this._subscribes = []; // 保存所有插件函数
 
     // 1.将传入的store数据进行格式化
     this.modules = new ModuleCollection(options);
@@ -98,15 +99,27 @@ class Store{
     // 2.将格式化后的数据分发到实例的state,getters,mutations,actions上
     // installModule函数的参数分别为store,rootState,path,rawModule
     installModule(this, this.state, [], this.modules.root);
+    
+    // plugins
+    options.plugins.forEach(fn => fn(this));
   }
   get state(){
     return this.vm.state;
   }
   commit = (mutationName, payload) => {
     this.mutations[mutationName].forEach(fn => fn(payload));
+
+    // 执行commit的时候将对应的插件函数执行
+    // 发布
+    this._subscribes.forEach((fn) => {
+      fn({type: mutationName, payload}, this.state);
+    });
   }
   dispatch = (actionName, payload) => {
     this.actions[actionName].forEach(fn => fn(payload));
+  }
+  subscribe(fn) { // 订阅全部的插件函数
+    this._subscribes.push(fn);
   }
 }
 const install = (_Vue) => {
